@@ -1,8 +1,13 @@
 import { Star, Calendar, Clock, User, Bookmark } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const DetailPage = () => {
+  const location = useLocation();
+  const movieId = location.state?.id;
+  console.log('movieId', movieId);
+
   return (
-    <div className="relative z-10 p-6 md:p-12 flex flex-col md:flex-row gap-8 items-start">
+    <main className="relative z-10 flex flex-col md:flex-row gap-8 items-start pt-6">
       <img
         src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=800"
         alt="Image"
@@ -82,7 +87,7 @@ const DetailPage = () => {
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
