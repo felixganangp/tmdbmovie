@@ -41,8 +41,8 @@ export interface MovieCredits {
 
 export type Category = 'popular' | 'now_playing' | 'top_rated' | 'upcoming';
 
-export type Categories = {
+export interface Categories {
   key: Category;
   icon: LucideIcon;
   label: string;
-};
+}

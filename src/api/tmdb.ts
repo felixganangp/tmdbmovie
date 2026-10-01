@@ -9,7 +9,6 @@ export const tmdbApi = axios.create({
     Authorization: `Bearer ${TMDB_API_KEY}`,
   },
   params: {
-    // api_key: TMDB_API_KEY,
     language: 'en-US',
   },
 });
@@ -18,7 +17,6 @@ export const getImageUrl = (
   path: string | null,
   size: 'w500' | 'original' = 'w500',
 ) => {
-  // if (!path) return 'https://dummyimage.com/500x750/1d293d/1d293d.png';
   if (!path)
     return 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=800';
   return `https://image.tmdb.org/t/p/${size}${path}`;

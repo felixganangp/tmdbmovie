@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useDebounce } from '../../hooks/useDebounce';
-import { useSearch } from '../../context/searchContext';
+import { useDebounce } from '../../hooks/useDebounce/useDebounce';
+import { useSearch } from '../../context/searchContext/searchContext';
 import { Search } from 'lucide-react';
 
 const SearchBar = () => {
-  const { setSearchQuery } = useSearch();
-
   const [inputValue, setInputValue] = useState('');
-
+  const { setSearchQuery } = useSearch();
   const debouncedSearchTerm = useDebounce(inputValue, 500);
 
   useEffect(() => {

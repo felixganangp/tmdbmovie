@@ -29,7 +29,7 @@ const ErrorPage: React.FC = () => {
           404
         </h1>
         <p className="text-[clamp(1.125rem,2vw,1.25rem)] text-neutral-100 leading-[170%] tracking-[-2%] text-center">
-          Ooops! Terjadi Kesalahan {errorMessage}
+          Ooops! Terjadi Kesalahan - {errorMessage}
         </p>
         <Link
           to="/"

@@ -1,6 +1,7 @@
-import { useSearch } from '../../context/searchContext';
-import { useCategory } from '../../context/categoryContext';
+import { useSearch } from '../../context/searchContext/searchContext';
+import { useCategory } from '../../context/categoryContext/categoryContext';
 import type { Category } from '../../types/movie';
+import Button from '../Button/Button';
 
 const Filter = () => {
   const { clearSearch } = useSearch();
@@ -17,17 +18,13 @@ const Filter = () => {
         {categories.map(cat => {
           const Icon = cat.icon;
           return (
-            <button
+            <Button
               key={cat.key}
+              label={cat.label}
+              icon={<Icon className="w-4 h-4" />}
+              active={selectedCategory === cat.key}
               onClick={() => onSelectCategory(cat.key)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                selectedCategory === cat.key
-                  ? 'bg-linear-to-r from-rose-600 to-pink-600 shadow-lg shadow-rose-600/25'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-              }`}>
-              <Icon className="w-4 h-4" />
-              {cat.label}
-            </button>
+            />
           );
         })}
       </div>
