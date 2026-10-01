@@ -1,4 +1,3 @@
-import { ArrowBigRight } from 'lucide-react';
 import React from 'react';
 import { useRouteError, Link, isRouteErrorResponse } from 'react-router-dom';
 import { ArrowBigRightDash } from 'lucide-react';
@@ -26,7 +25,7 @@ const ErrorPage: React.FC = () => {
       className="relative bg-slate-950 text-slate-100 w-full h-screen">
       <div className="flex flex-col justify-center items-center space-y-6 w-full h-full">
         <h1 className="font-semibold text-[clamp(3rem,5vw,5rem)] text-4xl text-neutral-100 leading-[110%] tracking-[-4%]">
-          404
+          {statusCode || '404'}
         </h1>
         <p className="text-[clamp(1.125rem,2vw,1.25rem)] text-neutral-100 leading-[170%] tracking-[-2%] text-center">
           Ooops! Terjadi Kesalahan - {errorMessage}
