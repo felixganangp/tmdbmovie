@@ -1,39 +1,21 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import {
-  TrendingUp,
-  Calendar,
-  Play,
-  Award,
-  SlidersHorizontal,
-} from 'lucide-react';
-import type { Movie, Category, Categories } from '../../types/movie';
 import { tmdbApi } from '../../api/tmdb';
-import { useDebounce } from '../../hooks/useDebounce';
+import type { Movie } from '../../types/movie';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
-import MovieCard from '../../components/MovieCard';
-import { Loader } from '../../components/Loader';
+import { useCategory } from '../../context/categoryContext';
 import { useSearch } from '../../context/searchContext';
-
-const categories: Categories[] = [
-  { key: 'popular', label: 'Popular', icon: TrendingUp },
-  { key: 'now_playing', label: 'Now Playing', icon: Play },
-  { key: 'top_rated', label: 'Top Rated', icon: Award },
-  { key: 'upcoming', label: 'Upcoming', icon: Calendar },
-];
+import MovieList from '../../components/MovieList/MovieList';
+import Filter from '../../components/Filter/Filter';
+import { Loader } from '../../components/Loader';
 
 const HomePage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [category, setCategory] = useState<Category>('popular');
-  // const [searchQuery, setSearchQuery] = useState('');
   const { searchQuery } = useSearch();
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const loaderRef = useRef(null);
-
-  const debouncedSearch = useDebounce(searchQuery, 500);
+  const { selectedCategory } = useCategory();
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   const fetchMovies = useCallback(
     async (
@@ -78,21 +60,26 @@ const HomePage = () => {
   useEffect(() => {
     const controller = new AbortController();
     setPage(1);
-
-    fetchMovies(1, category, debouncedSearch, true, controller.signal);
+    fetchMovies(1, selectedCategory, searchQuery, true, controller.signal);
 
     return () => {
       controller.abort();
     };
-  }, [category, debouncedSearch, fetchMovies]);
+  }, [selectedCategory, searchQuery, fetchMovies]);
 
   const handleLoadMore = useCallback(() => {
+    const controller = new AbortController();
     const nextPage = page + 1;
     setPage(nextPage);
 
-    const controller = new AbortController();
-    fetchMovies(nextPage, category, debouncedSearch, false, controller.signal);
-  }, [page, category, debouncedSearch, fetchMovies]);
+    fetchMovies(
+      nextPage,
+      selectedCategory,
+      searchQuery,
+      false,
+      controller.signal,
+    );
+  }, [page, selectedCategory, searchQuery, fetchMovies]);
 
   useInfiniteScroll({
     loading,
@@ -100,63 +87,25 @@ const HomePage = () => {
     onLoadMore: handleLoadMore,
   });
 
+  if (loading && movies.length === 0) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <>
       <main className="pt-6">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
-            {categories.map(cat => {
-              const Icon = cat.icon;
-              return (
-                <button
-                  key={cat.key}
-                  onClick={() => setCategory(cat.key)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    category === cat.key && !searchQuery
-                      ? 'bg-linear-to-r from-rose-600 to-pink-600 shadow-lg shadow-rose-600/25'
-                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                  }`}>
-                  <Icon className="w-4 h-4" />
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="text-xs text-slate-400 flex items-center gap-2">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-rose-500" />
-          </div>
-        </div>
+        <Filter />
         {movies.length === 0 && !loading ? (
           <div className="text-center py-20 text-gray-400 text-lg">
             No movies found.
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 py-6">
-            {movies.map((movie, index) => (
-              <MovieCard
-                key={`${movie.id}-${Math.random()}`}
-                movie={movie}
-                index={index}
-              />
-            ))}
-          </div>
+          <MovieList movies={movies} />
         )}
-        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 pt-6">
-          <Link to={`/movies/movie`} state={{ id: 1 }}>
-            <MovieCard />
-          </Link>
-          <Link to={`/movies/movie2`} state={{ id: 2 }}>
-            <MovieCard />
-          </Link>
-          <Link to={`/movies/movie3`} state={{ id: 3 }}>
-            <MovieCard />
-          </Link>
-        </div> */}
-        <div
-          ref={loaderRef}
-          style={{ textAlign: 'center', padding: '20px' }}></div>
-        {loading && <Loader />}
       </main>
     </>
   );
