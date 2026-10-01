@@ -1,7 +1,11 @@
 import { Search, Film, Bookmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
   return (
     <>
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 shadow-2xl">
@@ -22,16 +26,11 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="flex-1 max-w-md hidden md:block">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search movies by title or synopsis..."
-                className="w-full bg-slate-900/90 border border-slate-800 rounded-full pl-11 pr-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 transition-all shadow-inner"
-              />
+          {currentPath === '/movies' && (
+            <div className="flex-1 max-w-md hidden md:block">
+              <SearchBar />
             </div>
-          </div>
+          )}
 
           <div className="flex items-center gap-3">
             <button
@@ -43,7 +42,7 @@ const Navbar = () => {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-2 bg-rose-600 text-white shadow-lg shadow-rose-600/30`}>
               <Bookmark className="w-4 h-4" />
               <span className="hidden sm:inline">Watchlist</span>
-              <span className="bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full text-xs">
+              <span className="bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full text-xs ">
                 10
               </span>
             </button>
