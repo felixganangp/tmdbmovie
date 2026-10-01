@@ -12,8 +12,6 @@ A modern, responsive movie browsing web application built with React.js, TypeScr
 
 - **Movie Detail Page:**: View comprehensive movie details, including backdrop posters, synopsis, release year, runtime, vote average, director, and main cast members.
 
-- **Watchlist & GLobal Context Testing:**: Save and manage favorite movies locally via custom React Context and localStorage.
-
 - **Abort Controller:**: Automatically cancels pending network requests to prevent memory leaks and race conditions.
 
 - **Unit Testing:**: Component testing implemented using React Testing Library and Jest.
