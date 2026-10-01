@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { MovieDetail, MovieCredits } from '../../types/movie';
 import { tmdbApi, getImageUrl } from '../../api/tmdb';
 import { Loader } from '../../components/Loader';
 import axios from 'axios';
-import { Star, Calendar, Clock, User, Bookmark } from 'lucide-react';
+import { Star, Calendar, Clock, User } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 import { FormatDateIndo } from '../../utils/formatter';
 
 const DetailPage = () => {
@@ -31,7 +31,6 @@ const DetailPage = () => {
 
         setMovie(movieRes.data);
         setCredits(creditsRes.data);
-        console.log(movieRes);
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.error('Error fetching movie details:', error);
@@ -63,7 +62,7 @@ const DetailPage = () => {
   const mainCast = credits?.cast.slice(0, 6) || [];
 
   return (
-    <main className="relative z-10 flex flex-col">
+    <main className="relative z-10 flex flex-col pb-10">
       <div className="pt-6">
         <Breadcrumbs />
       </div>
@@ -86,9 +85,9 @@ const DetailPage = () => {
                   </span>
                 ))}
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
               {movie.title}
-            </h1>
+            </h2>
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-300">
@@ -145,14 +144,6 @@ const DetailPage = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className="pt-2 flex gap-4">
-          <button
-            className={`px-6 py-3 rounded-xl font-medium transition-all flex items-center gap-2 shadow-lg bg-emerald-600 text-white shadow-emerald-600/30`}>
-            <Bookmark className="w-5 h-5" />
-            In Watchlist
-          </button>
-        </div> */}
         </div>
       </div>
     </main>

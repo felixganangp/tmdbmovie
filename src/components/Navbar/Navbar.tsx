@@ -1,66 +1,52 @@
-import { Search, Film, Bookmark } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Film } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+
   return (
-    <>
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 shadow-2xl">
-        <div className="h-20 flex items-center justify-between gap-4">
-          <Link to={`/movies`}>
-            <div className="flex items-center gap-3 cursor-pointer group">
-              <div className="w-11 h-11 rounded-xl bg-linear-to-tr from-rose-600 via-pink-600 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-500/30 group-hover:scale-105 transition-transform duration-300">
-                <Film className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-black tracking-wider bg-linear-to-r from-white via-slate-200 to-rose-400 bg-clip-text text-transparent">
-                  MYFLIX
-                </h1>
-                <p className="text-[10px] tracking-widest text-rose-500 font-semibold uppercase">
-                  TMDB Movies
-                </p>
-              </div>
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 shadow-2xl">
+      <div className="h-20 flex items-center justify-between gap-4">
+        <Link to={`/movies`}>
+          <div className="flex items-center gap-3 cursor-pointer group">
+            <div className="w-11 h-11 rounded-xl bg-linear-to-tr from-rose-600 via-pink-600 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-500/30 group-hover:scale-105 transition-transform duration-300">
+              <Film className="w-6 h-6 text-white" />
             </div>
-          </Link>
-
-          {currentPath === '/movies' && (
-            <div className="flex-1 max-w-md hidden md:block">
-              <SearchBar />
-            </div>
-          )}
-
-          {currentPath !== '/movies' && (
-            <Link
-              to={`/movies`}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all bg-rose-600 text-white shadow-lg shadow-rose-600/30`}>
-              Browse
-            </Link>
-          )}
-
-          {/* <div className="flex items-center gap-3"> */}
-
-          {/* <button
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-2 bg-rose-600 text-white shadow-lg shadow-rose-600/30`}>
-              <Bookmark className="w-4 h-4" />
-              <span className="hidden sm:inline">Watchlist</span>
-              <span className="bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full text-xs ">
-                10
-              </span>
-            </button> */}
-          {/* </div> */}
-        </div>
-        {currentPath === '/movies' && (
-          <div className="px-4 pb-3 md:hidden">
-            <div className="relative">
-              <SearchBar />
+            <div>
+              <h1 className="text-xl font-black tracking-wider bg-linear-to-r from-white via-slate-200 to-rose-400 bg-clip-text text-transparent">
+                MYFLIX
+              </h1>
+              <p className="text-[10px] tracking-widest text-rose-500 font-semibold uppercase">
+                TMDB Movies
+              </p>
             </div>
           </div>
+        </Link>
+
+        {currentPath === '/movies' && (
+          <div className="flex-1 max-w-md hidden md:block">
+            <SearchBar />
+          </div>
         )}
-      </header>
-    </>
+
+        {currentPath !== '/movies' && (
+          <Link
+            to={`/movies`}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all bg-rose-600 text-white shadow-lg shadow-rose-600/30`}>
+            Browse
+          </Link>
+        )}
+      </div>
+      {currentPath === '/movies' && (
+        <div className="px-4 pb-3 md:hidden">
+          <div className="relative">
+            <SearchBar />
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

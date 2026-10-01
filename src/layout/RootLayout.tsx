@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
-import { SearchProvider } from '../context/searchContext';
-import { CategoryProvider } from '../context/categoryContext';
+import { SearchProvider } from '../context/searchContext/searchContext';
+import { CategoryProvider } from '../context/categoryContext/categoryContext';
 
 const RootLayout: React.FC = () => {
   return (

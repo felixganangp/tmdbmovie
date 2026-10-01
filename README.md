@@ -25,6 +25,8 @@ A modern, responsive movie browsing web application built with React.js, TypeScr
 - **Tailwind:** - Utility first CSS framework
 - **Axios:** - Popular promise-based JavaScript library
 - **Vite:** - Fast frontend build tool for web development
+- **React Testing Library:** - Testing library for React applications
+- **Context API:** - React library that simplifies state management
 
 ## Getting Started
 
@@ -44,7 +46,7 @@ pnpm install
 pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the frontend result.
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the frontend result.
 
 5. Run unit test:
 

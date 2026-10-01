@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import type { Category, Categories } from '../types/movie';
+import type { Category, Categories } from '../../types/movie';
 import { TrendingUp, Calendar, Play, Award } from 'lucide-react';
 
 interface CategoryContextType {
@@ -35,7 +35,7 @@ export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useCategory = () => {
   const context = useContext(CategoryContext);
   if (!context) {
-    throw new Error('useCategory must be used within a SearchProvider');
+    throw new Error('useCategory must be used within a CategoryProvider');
   }
   return context;
 };
