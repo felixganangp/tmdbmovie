@@ -8,7 +8,17 @@ export interface Movie {
   backdrop_path: string | null;
   release_date: string;
   vote_average: number;
+  vote_count: number;
   runtime?: number;
+}
+
+export interface MovieDetail extends Movie {
+  genres: Genre[];
+}
+
+export interface Genre {
+  id: number;
+  name: string;
 }
 
 export interface CastMember {

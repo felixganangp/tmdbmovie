@@ -26,6 +26,7 @@ A modern, responsive movie browsing web application built with React.js, TypeScr
 - **Typescript:** - Strongly typed superset of JavaScript
 - **Tailwind:** - Utility first CSS framework
 - **Axios:** - Popular promise-based JavaScript library
+- **Vite:** - Fast frontend build tool for web development
 
 ## Getting Started
 
