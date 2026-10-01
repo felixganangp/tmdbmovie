@@ -1,6 +1,6 @@
 # TMDB Movies
 
-A modern, responsive movie browsing web application built with React.js, TypeScript, and Tailwind CSS. It integrates with the TMDB API to provide real-time movie exploration, category filtering, instant searching, infinite scrolling, detailed cast views, and watchlist management.
+A modern, responsive movie browsing web application built with React.js, TypeScript, and Tailwind CSS. It integrates with the TMDB API to provide real-time movie exploration, category filtering, instant searching, infinite scrolling, detailed cast views and many more.
 
 ## 🚀 Features
 
