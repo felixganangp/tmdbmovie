@@ -99,7 +99,7 @@ const HomePage = () => {
     <>
       <main className="pt-6">
         <Filter />
-        {movies.length === 0 && !loading ? (
+        {movies && movies.length === 0 && !loading ? (
           <div className="text-center py-20 text-gray-400 text-lg">
             No movies found.
           </div>
