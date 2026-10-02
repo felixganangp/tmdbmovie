@@ -38,7 +38,12 @@ A modern, responsive movie browsing web application built with React.js, TypeScr
 pnpm install
 ```
 
-3. Configure your TMDB API Key: Create a .env file in the root directory of your project then add your TMDB API key: VITE_TMDB_API_KEY and TMDB base API Url: VITE_API_URL
+3. Configure your TMDB API Key: Create a .env file in the root directory of your project then add your TMDB API key and TMDB base API Url:
+ 
+```bash
+VITE_TMDB_API_KEY=Your API key
+VITE_API_URL:https=//api.themoviedb.org/3
+```
 
 4. Run the development server:
 
