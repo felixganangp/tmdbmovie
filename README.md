@@ -42,7 +42,7 @@ pnpm install
  
 ```bash
 VITE_TMDB_API_KEY=Your API key
-VITE_API_URL:https=//api.themoviedb.org/3
+VITE_API_URL=https://api.themoviedb.org/3
 ```
 
 4. Run the development server:
